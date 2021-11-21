@@ -1,0 +1,15 @@
+2021/04/27 09:19:58 [error] 23#23: *2 directory index of "/var/www/app/" is forbidden, client: 172.18.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2021/11/21 11:38:47 [notice] 1#1: using the "epoll" event method
+2021/11/21 11:38:47 [notice] 1#1: nginx/1.21.4
+2021/11/21 11:38:47 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
+2021/11/21 11:38:47 [notice] 1#1: OS: Linux 5.10.60.1-microsoft-standard-WSL2
+2021/11/21 11:38:47 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/11/21 11:38:47 [notice] 1#1: start worker processes
+2021/11/21 11:38:47 [notice] 1#1: start worker process 23
+2021/11/21 11:38:47 [notice] 1#1: start worker process 24
+2021/11/21 11:38:47 [notice] 1#1: start worker process 25
+2021/11/21 11:38:47 [notice] 1#1: start worker process 26
+2021/11/21 11:38:47 [notice] 1#1: start worker process 27
+2021/11/21 11:38:47 [notice] 1#1: start worker process 28
+2021/11/21 11:38:47 [notice] 1#1: start worker process 29
+2021/11/21 11:38:47 [notice] 1#1: start worker process 30

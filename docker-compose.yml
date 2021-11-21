@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+    pgsql:
+        image: postgres:latest
+        container_name: pgsql
+        ports:
+            - 5432:5432
+        volumes:
+            - ./docker/psql/data:/var/lib/postgresql/data
+            - ./docker/psql/init.sql:/docker-entrypoint-initdb.d/db.sql
+        environment:
+            POSTGRES_DB: card
+            POSTGRES_USER: card
+            POSTGRES_PASSWORD: cardLocal
+            PGDATA: /tmp
+    php:
+        build: ./docker/php
+        container_name: php
+        volumes:
+            - ./:/var/www/app/
+        links:
+            - pgsql
+    nginx:
+        image: nginx:latest
+        container_name: nginx
+        ports:
+            - 80:80
+        volumes:
+            - ./docker/nginx/core:/etc/nginx/conf.d
+            - ./docker/nginx/logs:/var/log/nginx/
+            - ./docker/nginx/html:/usr/share/nginx/html/
+            - ./:/var/www/app/
+        links:
+            - php
+            - pgsql
