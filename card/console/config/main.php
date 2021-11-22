@@ -8,29 +8,44 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-console',
-    'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'id'                  => 'app-console',
+    'basePath'            => dirname(__DIR__),
+    'bootstrap'           => ['log', 'encrypter'],
     'controllerNamespace' => 'console\controllers',
-    'aliases' => [
+    'aliases'             => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-    'controllerMap' => [
+    'controllerMap'       => [
         'fixture' => [
-            'class' => 'yii\console\controllers\FixtureController',
+            'class'     => 'yii\console\controllers\FixtureController',
             'namespace' => 'common\fixtures',
-          ],
+        ],
     ],
-    'components' => [
-        'log' => [
-            'targets' => [
+    'components'          => [
+        'log'          => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets'    => [
                 [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'class'   => 'yii\log\FileTarget',
+                    'logVars' => [],
+                    'levels'  => ['warning'],
+                ],
+                [
+                    'class'      => 'yii\log\FileTarget',
+                    'logVars'    => [],
+                    'levels'     => ['info'],
+                    'categories' => ['success'],
+                ],
+                [
+                    'class'      => 'yii\log\FileTarget',
+                    'logVars'    => [],
+                    'levels'     => ['error'],
+                    'categories' => ['error'],
                 ],
             ],
         ],
     ],
-    'params' => $params,
+    'params'              => $params,
+    'encrypter'           => 'nickcv\encrypter\Module',
 ];

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\CardForm;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -15,6 +16,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -29,10 +31,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup', 'token'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup', 'token'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -255,5 +257,27 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+    public function actionCard()
+    {
+        $model = new CardForm();
+
+        return $this->render('card', [
+            'model' => $model,
+        ]);
+    }
+    /**
+     * @throws \Exception
+     */
+    public function actionToken()
+    {
+        $model = new CardForm();
+
+        if (!$model->load(Yii::$app->request->post())) {
+            throw new BadRequestHttpException('Что-то пошло не так');
+        }
+
+        return $this->asJson($model->token(Yii::$app->request->csrfToken));
     }
 }
